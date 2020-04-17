@@ -1,8 +1,7 @@
-
 @extends('layouts.app')
 
 @section('content')
 
-    TODO: welcome
+    TODO: create
 
 @endsection
