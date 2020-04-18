@@ -3,8 +3,9 @@
 @section('content')
 
 
-    <form action="{{ url('tasks') }}" method="POST">
+    <form action="{{ url('tasks/' . $task->id) }}" method="POST">
         @csrf
+        @method('PUT')
 
         @include('tasks.form-contents')
 
