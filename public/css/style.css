@@ -1,3 +1,10 @@
+.success-toast {
+    position: absolute;
+    top: -7px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
 .task-complete-button {
     font-size: 22px;
 }

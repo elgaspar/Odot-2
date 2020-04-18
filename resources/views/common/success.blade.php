@@ -1,11 +1,13 @@
 @if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show">
-        
-        {{ session('success') }}
 
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-
+    <div aria-live="polite" aria-atomic="true">
+        <div class="toast success-toast">
+            <div class="alert alert-success m-0">
+                {{ session('success') }}
+            </div>
+        </div>
     </div>
+    
 @endif
+
+
