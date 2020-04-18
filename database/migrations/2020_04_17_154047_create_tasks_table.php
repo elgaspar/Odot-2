@@ -16,8 +16,8 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable(false);
+            $table->integer('user_id')->unsigned()->index();
             //TODO: category_id
-            //TODO: user_id
             //TODO: parent_task_id
             $table->boolean('is_completed')->default(false);
             $table->timestamps();

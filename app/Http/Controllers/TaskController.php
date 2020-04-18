@@ -3,17 +3,32 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Repositories\TaskRepository;
+use App\Task;
+
 
 class TaskController extends Controller
 {
+    protected $tasks;
+
+    public function __construct(TaskRepository $tasks)
+    {
+        $this->middleware('auth');
+        $this->tasks = $tasks;
+    }
+
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('tasks.index');
+        $user_tasks = $this->tasks->forUser($request->user());
+
+        return view('tasks.index', [
+            'tasks' => $user_tasks
+        ]);
     }
 
     /**
@@ -34,7 +49,15 @@ class TaskController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|max:255'
+        ]);
+
+        $request->user()->tasks()->create([
+            'name' => $request->name
+        ]);
+
+        return redirect('/tasks');
     }
 
     /**
@@ -43,9 +66,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Task $task)
     {
-        //
+        //do nothing (we don't need this route)
+        return redirect('/tasks');
     }
 
     /**
@@ -54,9 +78,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Task $task)
     {
-        //
+        //TODO
     }
 
     /**
@@ -66,9 +90,9 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Task $task)
     {
-        //
+        //TODO
     }
 
     /**
@@ -77,8 +101,10 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Task $task)
     {
-        //
+        $this->authorize('destroy', $task);
+        $task->delete();
+        return redirect('/tasks');
     }
 }
