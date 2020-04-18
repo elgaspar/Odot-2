@@ -6,7 +6,7 @@
     <form action="{{ route('tasks.store') }}" method="POST">
         @csrf
 
-        @include('tasks.form-contents')
+        @include('tasks.form-content')
 
     </form>
 

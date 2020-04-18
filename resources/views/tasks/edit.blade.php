@@ -7,7 +7,7 @@
         @csrf
         @method('PUT')
 
-        @include('tasks.form-contents')
+        @include('tasks.form-content')
 
     </form>
 

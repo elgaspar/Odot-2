@@ -76,6 +76,28 @@ class TaskController extends Controller
             ->with('success', 'Task updated.');
     }
 
+    //marks task as completed
+    public function completed(Request $request, Task $task)
+    {
+        $task->update([
+            'is_completed' => true
+        ]);
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'TODO');
+    }
+
+    //marks task as incomplete
+    public function incomplete(Request $request, Task $task)
+    {
+        $task->update([
+            'is_completed' => false
+        ]);
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'TODO');
+    }
+
     //Remove the specified resource from storage.
     public function destroy(Task $task)
     {

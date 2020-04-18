@@ -22,3 +22,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::resource('tasks', 'TaskController');
+
+Route::post('tasks/{task}/completed', 'TaskController@completed')
+    ->name('tasks.completed');
+
+Route::post('tasks/{task}/incomplete', 'TaskController@incomplete')
+    ->name('tasks.incomplete');

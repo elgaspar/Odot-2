@@ -13,24 +13,18 @@
     @if (count($tasks) > 0)
         <table class="table table-striped task-table">
 
-            <!-- Table Headings -->
             <thead>
-                <th>&nbsp;</th>
+                <th><!-- empty --></th>
                 <th class="w-100">Task</th>
-                <th>&nbsp;</th>
+                <th><!-- empty --></th>
 
             </thead>
 
-            <!-- Table Body -->
             <tbody>
                 @foreach ($tasks as $task)
                     <tr>
                         <td class="align-middle" style="font-size: 22px;">
-                            @if ($task->is_completed)
-                                <i class="fas fa-check-circle"></i>
-                            @else
-                                <i class="fas fa-circle"></i>
-                            @endif
+                            @include('tasks.buttons.completed')
                         </td>
 
                         <td class="table-text align-middle">
@@ -38,17 +32,8 @@
                         </td>
 
                         <td class="d-flex">
-                            <a href="{{ route('tasks.edit', $task->id) }}" class="btn text-secondary">
-                                <i class="fas fa-edit"></i>
-                            </a>
-
-                            <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn text-secondary">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
+                            @include('tasks.buttons.edit')
+                            @include('tasks.buttons.delete')
                         </td>
                         
                     </tr>
