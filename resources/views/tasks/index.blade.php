@@ -38,11 +38,11 @@
                         </td>
 
                         <td class="d-flex">
-                            <a href="{{ url('tasks/' . $task->id) . '/edit' }}" class="btn text-secondary">
+                            <a href="{{ route('tasks.edit', $task->id) }}" class="btn text-secondary">
                                 <i class="fas fa-edit"></i>
                             </a>
 
-                            <form action="{{ url('tasks/' . $task->id) }}" method="POST">
+                            <form action="{{ route('tasks.destroy', $task->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn text-secondary">

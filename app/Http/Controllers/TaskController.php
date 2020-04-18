@@ -44,14 +44,15 @@ class TaskController extends Controller
             'name' => $request->name
         ]);
 
-        return redirect('/tasks');
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task created.');
     }
 
     //Display the specified resource.
     public function show(Task $task)
     {
         //do nothing (we don't need this route)
-        return redirect('/tasks');
+        return redirect()->route('tasks.index');
     }
 
     //Show the form for editing the specified resource.
@@ -65,7 +66,14 @@ class TaskController extends Controller
     //Update the specified resource in storage.
     public function update(Request $request, Task $task)
     {
-        //TODO
+        $this->validate($request, [
+            'name' => 'required|max:255'
+        ]);
+
+        $task->update($request->all());
+
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task updated.');
     }
 
     //Remove the specified resource from storage.
@@ -73,6 +81,7 @@ class TaskController extends Controller
     {
         $this->authorize('destroy', $task);
         $task->delete();
-        return redirect('/tasks');
+        return redirect()->route('tasks.index')
+            ->with('success', 'Task removed.');
     }
 }

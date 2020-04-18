@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <form action="{{ url('tasks') }}" method="POST">
+    <form action="{{ route('tasks.store') }}" method="POST">
         @csrf
 
         @include('tasks.form-contents')

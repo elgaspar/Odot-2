@@ -4,6 +4,6 @@
 </div>
 
 <div class="form-group d-flex justify-content-between">
-    <a href="{{ url('tasks') }}" class="btn btn-secondary">Back</a>
+    <a href="{{ route('tasks.index') }}" class="btn btn-secondary">Back</a>
     <button type="submit" class="btn btn-primary">{{ isset($task) ? 'Save'  : 'Create'}}</button>
 </div>

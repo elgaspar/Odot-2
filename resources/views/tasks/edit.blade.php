@@ -3,7 +3,7 @@
 @section('content')
 
 
-    <form action="{{ url('tasks/' . $task->id) }}" method="POST">
+    <form action="{{ route('tasks.update', $task->id) }}" method="POST">
         @csrf
         @method('PUT')
 
