@@ -23,8 +23,8 @@
             <tbody>
                 @foreach ($tasks as $task)
                     <tr>
-                        <td class="align-middle" style="font-size: 22px;">
-                            @include('tasks.buttons.completed')
+                        <td class="align-middle">
+                            @include('tasks.buttons.complete')
                         </td>
 
                         <td class="table-text align-middle">

@@ -1,0 +1,11 @@
+.task-complete-button {
+    font-size: 22px;
+}
+
+.task-action-btn:focus {
+    box-shadow: none;
+}
+
+.task-action-btn:hover i {
+    opacity: 0.7;
+}
