@@ -5,6 +5,14 @@
     transform: translateX(-50%);
 }
 
+.task form {
+    /* display: inline-block; */
+}
+
+.task-actions-group {
+    /* display: inline-block; */
+}
+
 .task-complete-button {
     font-size: 22px;
 }

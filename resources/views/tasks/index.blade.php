@@ -10,36 +10,13 @@
         <a class="btn btn-primary" href="{{ route('tasks.create') }}" role="button">Create Task</a>
     </div>
 
-    @if (count($tasks) > 0)
-        <table class="table table-striped task-table">
+    <ul class="list-group">
 
-            <thead>
-                <th><!-- empty --></th>
-                <th class="w-100">Task</th>
-                <th><!-- empty --></th>
+        @include('tasks.children', [
+                'tasks' => $tasks,
+                'indent' => ''
+            ])
 
-            </thead>
-
-            <tbody>
-                @foreach ($tasks as $task)
-                    <tr>
-                        <td class="align-middle">
-                            @include('tasks.buttons.complete')
-                        </td>
-
-                        <td class="table-text align-middle">
-                            <div>{{ $task->name }}</div>
-                        </td>
-
-                        <td class="d-flex">
-                            @include('tasks.buttons.edit')
-                            @include('tasks.buttons.delete')
-                        </td>
-                        
-                    </tr>
-                @endforeach
-            </tbody>
-        </table>
-    @endif
+    </ul>
 
 @endsection
