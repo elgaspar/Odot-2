@@ -17,7 +17,8 @@ class TaskController extends Controller
         $this->tasks = $tasks;
     }
 
-    //Display a listing of the resource.
+
+    //Display a listing of the tasks.
     public function index(Request $request)
     {
         $user_tasks = $this->tasks->forUser($request->user());
@@ -27,48 +28,30 @@ class TaskController extends Controller
         ]);
     }
 
-    //Show the form for creating a new resource.
-    public function create()
-    {
-        return view('tasks.create');
-    }
-
-    //Store a newly created resource in storage.
+    //Store a newly created task in storage.
     public function store(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|max:255'
         ]);
 
-        $request->user()->tasks()->create([
-            'name' => $request->name
-        ]);
+        $request->user()->tasks()->create($request->all());
 
         return redirect()->route('tasks.index')
             ->with('success', 'Task created.');
     }
 
-    //Display the specified resource.
-    public function show(Task $task)
-    {
-        //do nothing (we don't need this route)
-        return redirect()->route('tasks.index');
-    }
-
-    //Show the form for editing the specified resource.
-    public function edit(Task $task)
-    {
-        return view('tasks.edit', [
-            'task' => $task
-        ]);
-    }
-
-    //Update the specified resource in storage.
-    public function update(Request $request, Task $task)
+    //Update the specified task in storage.
+    public function update(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|max:255'
+            'id' => 'required',
+            'name' => 'max:255'
         ]);
+
+        $task = $this->tasks->get($request->user(), $request->id);
+
+        $this->authorize('update', $task);
 
         $task->update($request->all());
 
@@ -76,29 +59,7 @@ class TaskController extends Controller
             ->with('success', 'Task updated.');
     }
 
-    //marks task as completed
-    public function completed(Request $request, Task $task)
-    {
-        $task->update([
-            'is_completed' => true
-        ]);
-
-        return redirect()->route('tasks.index')
-            ->with('success', 'TODO');
-    }
-
-    //marks task as incomplete
-    public function incomplete(Request $request, Task $task)
-    {
-        $task->update([
-            'is_completed' => false
-        ]);
-
-        return redirect()->route('tasks.index')
-            ->with('success', 'TODO');
-    }
-
-    //Remove the specified resource from storage.
+    //Remove the specified task from storage.
     public function destroy(Task $task)
     {
         $this->authorize('destroy', $task);

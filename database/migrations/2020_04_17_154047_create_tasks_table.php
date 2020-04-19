@@ -18,10 +18,10 @@ class CreateTasksTable extends Migration
             $table->string('name')->nullable(false);
 
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->unsignedBigInteger('parent_id')->nullable();
-            $table->foreign('parent_id')->references('id')->on('tasks');
+            $table->foreign('parent_id')->references('id')->on('tasks')->onDelete('cascade');
 
             //TODO: category_id
             $table->boolean('is_completed')->default(false);

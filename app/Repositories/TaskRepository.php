@@ -6,6 +6,11 @@ use App\User;
 
 class TaskRepository
 {
+    public function get(User $user, int $id)
+    {
+        return $user->tasks()->find($id);
+    }
+
     public function forUser(User $user)
     {
         return $user->tasks()

@@ -2,21 +2,23 @@
 
 @section('content')
 
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <div class="">
-            Total: {{ count($tasks) }} tasks
-        </div>
-
-        <a class="btn btn-primary" href="{{ route('tasks.create') }}" role="button">Create Task</a>
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="">
+        Total: {{ count($tasks) }} tasks
     </div>
 
-    <ul class="list-group">
+    @include('tasks.buttons.create')
+</div>
 
-        @include('tasks.children', [
-                'tasks' => $tasks,
-                'indent' => ''
-            ])
+<ul class="list-group">
 
-    </ul>
+    @include('tasks.children', [
+    'tasks' => $tasks,
+    'indent' => ''
+    ])
+
+</ul>
+
+@include('tasks.modal')
 
 @endsection
