@@ -1,10 +1,10 @@
 $(document).ready(function () {
 
-    class SuccessMessage {
+    class InfoMessage {
         constructor() {
-            let success_toast = $('.success-toast');
+            let success_toast = $('.info-toast');
             success_toast.toast({
-                delay: 2500
+                delay: 5000
             });
             success_toast.toast('show');
         }
@@ -104,7 +104,7 @@ $(document).ready(function () {
 
     //TODO: clean code -> make modal controllers child classes
 
-    new SuccessMessage();
+    new InfoMessage();
     new ProjectsModalController();
     new TasksModalController();
 

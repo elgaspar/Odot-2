@@ -1,8 +1,13 @@
-.success-toast {
-    position: absolute;
-    top: -7px;
+.info-toast {
+    position: fixed;
+    top: 60px;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 2;
+}
+
+.info-toast .title {
+    white-space: nowrap;
 }
 
 
