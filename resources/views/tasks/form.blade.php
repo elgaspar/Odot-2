@@ -5,6 +5,7 @@
 
     <input type="hidden" name="id">
     <input type="hidden" name="parent_id">
+    <input type="hidden" name="project_id" value="{{ $project->id }}">
 
     <div class="form-group">
         <label for="name">Name</label>

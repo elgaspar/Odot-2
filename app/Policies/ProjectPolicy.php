@@ -10,7 +10,6 @@ class ProjectPolicy
 {
     use HandlesAuthorization;
 
-
     //Determine whether the user can update the model.
     public function update(User $user, Project $project)
     {

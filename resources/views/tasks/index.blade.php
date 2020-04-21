@@ -16,6 +16,8 @@
 
 </ul>
 
-@include('tasks.modal')
+@include('tasks.modal',[
+'project' => $project
+])
 
 @endif

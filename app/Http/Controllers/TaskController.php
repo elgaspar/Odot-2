@@ -3,30 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Repositories\TaskRepository;
+use App\Repositories\ProjectRepository;
 use App\Task;
 
 
 class TaskController extends Controller
 {
-    protected $tasks;
+    protected $repository;
 
-    public function __construct(TaskRepository $tasks)
+    public function __construct(ProjectRepository $repository)
     {
         $this->middleware('auth');
-        $this->tasks = $tasks;
+        $this->repository = $repository;
     }
-
-
-    //Display a listing of the tasks.
-    // public function index(Request $request)
-    // {
-    //     // $user_tasks = $this->tasks->forUser($request->user());
-    //     $user_tasks = array(); //FIXME
-    //     return view('tasks.index', [
-    //         'tasks' => $user_tasks
-    //     ]);
-    // }
 
     //Store a newly created task in storage.
     public function store(Request $request)
@@ -35,9 +24,13 @@ class TaskController extends Controller
             'name' => 'required|max:255'
         ]);
 
-        $request->user()->tasks()->create($request->all());
+        $project = $this->repository->getProject($request->user(), $request->project_id);
 
-        return redirect()->route('tasks.index')
+        $this->authorize('update', $project);
+
+        $project->tasks()->create($request->all());
+
+        return redirect()->route('projects.view', ['project' => $project])
             ->with('success', 'Task created.');
     }
 
@@ -49,22 +42,22 @@ class TaskController extends Controller
             'name' => 'required|max:255'
         ]);
 
-        $task = $this->tasks->get($request->user(), $request->id);
+        $task = $this->repository->getTask($request->user(), $request->id);
 
-        $this->authorize('update', $task);
+        $this->authorize('update', $task->project); //if he is allowed to update project, he is allowed to update its tasks
 
         $task->update($request->all());
 
-        return redirect()->route('tasks.index')
-            ->with('success', 'Task updated.');
+        return redirect()->route('projects.view', ['project' => $task->project])
+            ->with('success', 'Task created.');
     }
 
     //Remove the specified task from storage.
     public function destroy(Task $task)
     {
-        $this->authorize('destroy', $task);
+        $this->authorize('destroy', $task->project);
         $task->delete();
-        return redirect()->route('tasks.index')
+        return redirect()->route('projects.view', ['project' => $task->project])
             ->with('success', 'Task removed.');
     }
 }

@@ -47,7 +47,8 @@
 {{ $current_project->name }}
 
 @include('tasks.index',[
-'tasks' => $current_project->tasks
+'project' => $current_project,
+'tasks' => $current_project->tasks()->where('parent_id', null)->get()
 ])
 @endif
 

@@ -8,19 +8,19 @@ use App\Project;
 
 class ProjectController extends Controller
 {
-    protected $projects;
+    protected $repository;
 
-    public function __construct(ProjectRepository $projects)
+    public function __construct(ProjectRepository $repository)
     {
         $this->middleware('auth');
-        $this->projects = $projects;
+        $this->repository = $repository;
     }
 
 
     // Display a listing of the projects.
     public function index(Request $request)
     {
-        $user_projects = $this->projects->forUser($request->user());
+        $user_projects = $this->repository->forUser($request->user());
 
         return view('projects.view', [
             'all_projects' => $user_projects,
@@ -30,12 +30,11 @@ class ProjectController extends Controller
     // Display a single project.
     public function view(Request $request, Project $project)
     {
-        $user_projects = $this->projects->forUser($request->user());
+        $user_projects = $this->repository->forUser($request->user());
 
         return view('projects.view', [
             'all_projects' => $user_projects,
-            'current_project' => $project,
-            'tasks' => $project->tasks
+            'current_project' => $project
         ]);
     }
 
@@ -60,7 +59,7 @@ class ProjectController extends Controller
             'name' => 'required|max:255'
         ]);
 
-        $project = $this->projects->get($request->user(), $request->id);
+        $project = $this->repository->getProject($request->user(), $request->id);
 
         $this->authorize('update', $project);
 

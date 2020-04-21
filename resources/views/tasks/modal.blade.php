@@ -10,7 +10,9 @@
             </div>
             <div class="modal-body">
 
-                @include('tasks.form')
+                @include('tasks.form',[
+                'project' => $project
+                ])
 
             </div>
         </div>
