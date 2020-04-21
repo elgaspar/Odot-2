@@ -80,9 +80,14 @@
         </nav>
 
         <main class="py-4">
-            <div class="container">
+            <div class="container-fluid">
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
+
+                    <div class="col-md-3">
+                        @yield('sidebar')
+                    </div>
+
+                    <div class="col-md-9">
 
                         @include('common.success')
                         @include('common.errors')
@@ -90,6 +95,7 @@
                         @yield('content')
 
                     </div>
+
                 </div>
             </div>
         </main>

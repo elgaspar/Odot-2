@@ -25,8 +25,30 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('tasks', 'TaskController@index')
-    ->name('tasks.index');
+
+
+
+Route::get('projects', 'ProjectController@index')
+    ->name('projects.index');
+
+Route::get('projects/{project}', 'ProjectController@view')
+    ->name('projects.view');
+
+Route::post('projects', 'ProjectController@store')
+    ->name('projects.create');
+
+Route::put('projects/{project?}', 'ProjectController@update')
+    ->name('projects.update');
+
+Route::delete('projects/{project}', 'ProjectController@destroy')
+    ->name('projects.destroy');
+
+
+
+
+
+// Route::get('tasks', 'TaskController@index')
+//     ->name('tasks.index');
 
 Route::post('tasks', 'TaskController@store')
     ->name('tasks.create');
@@ -36,13 +58,3 @@ Route::put('tasks/{task?}', 'TaskController@update')
 
 Route::delete('tasks/{task}', 'TaskController@destroy')
     ->name('tasks.destroy');
-
-
-// Route::post('tasks/{task}/markCompleted', 'TaskController@markCompleted')
-//     ->name('tasks.markCompleted');
-
-// Route::post('tasks/{task}/markIncomplete', 'TaskController@markIncomplete')
-//     ->name('tasks.markIncomplete');
-
-// Route::post('tasks/{task}/addChild', 'TaskController@addChild')
-//     ->name('tasks.addChild');

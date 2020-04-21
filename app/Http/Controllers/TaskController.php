@@ -19,14 +19,14 @@ class TaskController extends Controller
 
 
     //Display a listing of the tasks.
-    public function index(Request $request)
-    {
-        $user_tasks = $this->tasks->forUser($request->user());
-
-        return view('tasks.index', [
-            'tasks' => $user_tasks
-        ]);
-    }
+    // public function index(Request $request)
+    // {
+    //     // $user_tasks = $this->tasks->forUser($request->user());
+    //     $user_tasks = array(); //FIXME
+    //     return view('tasks.index', [
+    //         'tasks' => $user_tasks
+    //     ]);
+    // }
 
     //Store a newly created task in storage.
     public function store(Request $request)
@@ -46,7 +46,7 @@ class TaskController extends Controller
     {
         $this->validate($request, [
             'id' => 'required',
-            'name' => 'max:255'
+            'name' => 'required|max:255'
         ]);
 
         $task = $this->tasks->get($request->user(), $request->id);

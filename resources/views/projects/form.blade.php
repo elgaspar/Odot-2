@@ -1,10 +1,9 @@
-<form action="{{ url('tasks')}}" method="POST">
+<form action="{{ url('projects')}}" method="POST">
 
     @csrf
     <input type="hidden" name="_method" value="PUT">
 
     <input type="hidden" name="id">
-    <input type="hidden" name="parent_id">
 
     <div class="form-group">
         <label for="name">Name</label>
