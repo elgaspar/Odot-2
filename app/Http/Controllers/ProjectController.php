@@ -20,20 +20,24 @@ class ProjectController extends Controller
     // Display a listing of the projects.
     public function index(Request $request)
     {
-        $user_projects = $this->repository->forUser($request->user());
+        $user_projects = $this->repository->getAllProjectsOfUser($request->user());
+        $user_categories = $this->repository->getAllCategoriesOfUser($request->user());
 
         return view('projects.view', [
             'all_projects' => $user_projects,
+            'all_categories' => $user_categories,
         ]);
     }
 
     // Display a single project.
     public function view(Request $request, Project $project)
     {
-        $user_projects = $this->repository->forUser($request->user());
+        $user_projects = $this->repository->getAllProjectsOfUser($request->user());
+        $user_categories = $this->repository->getAllCategoriesOfUser($request->user());
 
         return view('projects.view', [
             'all_projects' => $user_projects,
+            'all_categories' => $user_categories,
             'current_project' => $project
         ]);
     }

@@ -29,14 +29,14 @@ $(document).ready(function () {
         _fill_in_inputs(button) {
             let create_task = button.data('create') ? true : false;
 
-            let title = 'Edit Task';
+            let title = 'Edit Project';
             let method = 'PUT';
 
             let name = button.data('name')
             let id = button.data('id');
 
             if (create_task) {
-                title = 'Create Task';
+                title = 'Create Project';
                 method = 'POST';
 
                 name = null;
@@ -45,6 +45,53 @@ $(document).ready(function () {
 
             this._method.val(method);
             this._input_name.val(name)
+            this._input_id.val(id)
+
+            this._title.text(title)
+        }
+    }
+
+    class CategoriesModalController {
+        constructor() {
+            this._DEFAULT_COLOR = '#000000';
+
+            this._modal = $('#categories-modal');
+            this._title = this._modal.find('.modal-title');
+            this._method = this._modal.find('input[name="_method"');
+            this._input_name = this._modal.find('input[name="name"');
+            this._input_color = this._modal.find('select[name="color"');
+            this._input_id = this._modal.find('input[name="id"');
+
+            let self = this;
+            this._modal.on('show.bs.modal', function (event) {
+                let button = $(event.relatedTarget)
+                self._fill_in_inputs(button);
+            })
+        }
+
+        _fill_in_inputs(button) {
+            let create_task = button.data('create') ? true : false;
+
+            let title = 'Edit Category';
+            let method = 'PUT';
+
+            let name = button.data('name')
+            let color = button.data('color')
+            let id = button.data('id');
+
+            if (create_task) {
+                title = 'Create Category';
+                method = 'POST';
+
+                name = null;
+                color = this._DEFAULT_COLOR;
+                id = null;
+            }
+
+            this._method.val(method);
+            this._input_name.val(name)
+            this._input_color.val(color);
+            this._input_color.change();
             this._input_id.val(id)
 
             this._title.text(title)
@@ -106,6 +153,8 @@ $(document).ready(function () {
 
     new InfoMessage();
     new ProjectsModalController();
+    new CategoriesModalController();
     new TasksModalController();
 
+    $('.color-select').selectpicker();
 });

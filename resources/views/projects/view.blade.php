@@ -8,6 +8,7 @@
 <h3 class="d-inline-block">Projects</h3>
 
 @include('projects.buttons.create')
+
 <ul class="list-group mt-3">
 
     @if (isset($all_projects) && count($all_projects) > 0)
@@ -33,9 +34,9 @@
 
 </ul>
 
-
 @include('projects.modal')
 
+@include('categories.index', ['categories' => $all_categories])
 
 
 @endsection

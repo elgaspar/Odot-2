@@ -45,10 +45,17 @@ Route::delete('projects/{project}', 'ProjectController@destroy')
 
 
 
+Route::post('categories', 'CategoryController@store')
+    ->name('categories.create');
+
+Route::put('categories/{category?}', 'CategoryController@update')
+    ->name('categories.update');
+
+Route::delete('categories/{category}', 'CategoryController@destroy')
+    ->name('categories.destroy');
 
 
-// Route::get('tasks', 'TaskController@index')
-//     ->name('tasks.index');
+
 
 Route::post('tasks', 'TaskController@store')
     ->name('tasks.create');

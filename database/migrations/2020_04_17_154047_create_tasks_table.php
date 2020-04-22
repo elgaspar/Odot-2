@@ -17,13 +17,15 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->string('name')->nullable(false);
 
-            $table->unsignedBigInteger('project_id');
+            $table->unsignedBigInteger('category_id')->nullable(true);
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); //TODO: on delete?
+
+            $table->unsignedBigInteger('project_id')->nullable(false);
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 
-            $table->unsignedBigInteger('parent_id')->nullable();
+            $table->unsignedBigInteger('parent_id')->nullable(true);
             $table->foreign('parent_id')->references('id')->on('tasks')->onDelete('cascade');
 
-            //TODO: category_id
             $table->boolean('is_completed')->default(false);
             $table->timestamps();
         });

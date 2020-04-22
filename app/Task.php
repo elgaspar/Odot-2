@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
-    protected $fillable = ['name', 'user_id', /* TODO: category_id */ 'parent_id',  'is_completed'];
+    protected $fillable = ['name', 'category_id', 'project_id', 'parent_id',  'is_completed'];
 
     public function project()
     {
@@ -21,5 +21,10 @@ class Task extends Model
     public function children()
     {
         return $this->hasMany(Task::class, 'parent_id');
+    }
+
+    public function category()
+    {
+        return $this->hasOne(Category::class, 'category_id');
     }
 }
