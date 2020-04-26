@@ -11,6 +11,15 @@
 }
 
 
+.users-table td {
+    vertical-align: middle;
+}
+
+.admin-user-row {
+    background-color: #bef5c4;
+    /* color: white; */
+}
+
 li.project.active a,
 li.project.active i {
     color: white;
@@ -22,8 +31,6 @@ li.project a {
     color: #3490dc;
 }
 
-
-li.project .actions {}
 
 
 .task-complete-button {
