@@ -45,7 +45,7 @@
 @section('content')
 
 @if(isset($current_project))
-{{ $current_project->name }}
+<h4 class="text-center">{{ $current_project->name }}</h4>
 
 @include('tasks.index',[
 'project' => $current_project,
