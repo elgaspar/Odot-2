@@ -13,7 +13,7 @@
     <div class="form-group">
         <label for="color">Color</label>
         <select class="color-select d-block w-100" name="color" id="color">
-            @include('categories.selectOption', ['color' => '#000000', 'name' => 'Default'])
+            @include('categories.selectOption', ['color' => '', 'name' => 'None'])
             @include('categories.selectOption', ['color' => '#0000FF', 'name' => 'Blue'])
             @include('categories.selectOption', ['color' => '#808080', 'name' => 'Gray'])
             @include('categories.selectOption', ['color' => '#008000', 'name' => 'Green'])

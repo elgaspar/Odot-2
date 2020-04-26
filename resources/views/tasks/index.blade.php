@@ -17,7 +17,8 @@
 </ul>
 
 @include('tasks.modal',[
-'project' => $project
+'project' => $project,
+'categories' => $categories
 ])
 
 @endif

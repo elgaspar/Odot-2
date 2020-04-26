@@ -13,7 +13,7 @@
     @foreach ($categories as $category)
 
     <li class="category list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-        <i class="fas fa-circle" style="color: {{ $category->color }}"></i>
+        <i class="fas fa-circle" style="color: {{ $category->color ? $category->color : '#000000' }}"></i>
         {{ $category->name }}
         <div class="actions d-inline-block float-right">
             @include('categories.buttons.edit')

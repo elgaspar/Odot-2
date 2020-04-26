@@ -22,7 +22,7 @@ class CategoryController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:255',
-            'color' => 'required|max:255'
+            'color' => 'max:255'
         ]);
 
         $request->user()->categories()->create($request->all());
@@ -37,7 +37,7 @@ class CategoryController extends Controller
         $this->validate($request, [
             'id' => 'required',
             'name' => 'required|max:255',
-            'color' => 'required|max:255'
+            'color' => 'max:255'
         ]);
 
         $category = $this->repository->getCategory($request->user(), $request->id);

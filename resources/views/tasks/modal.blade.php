@@ -11,7 +11,8 @@
             <div class="modal-body">
 
                 @include('tasks.form',[
-                'project' => $project
+                'project' => $project,
+                'categories' => $categories
                 ])
 
             </div>

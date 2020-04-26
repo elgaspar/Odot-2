@@ -53,8 +53,6 @@ $(document).ready(function () {
 
     class CategoriesModalController {
         constructor() {
-            this._DEFAULT_COLOR = '#000000';
-
             this._modal = $('#categories-modal');
             this._title = this._modal.find('.modal-title');
             this._method = this._modal.find('input[name="_method"');
@@ -84,7 +82,7 @@ $(document).ready(function () {
                 method = 'POST';
 
                 name = null;
-                color = this._DEFAULT_COLOR;
+                color = null;
                 id = null;
             }
 
@@ -104,6 +102,7 @@ $(document).ready(function () {
             this._title = this._modal.find('.modal-title');
             this._method = this._modal.find('input[name="_method"');
             this._input_name = this._modal.find('input[name="name"');
+            this._input_category_id = this._modal.find('select[name="category_id"');
             this._input_id = this._modal.find('input[name="id"');
             this._input_parent_id = this._modal.find('input[name="parent_id"');
 
@@ -121,6 +120,7 @@ $(document).ready(function () {
             let method = 'PUT';
 
             let name = button.data('name')
+            let category_id = button.data('category-id')
             let id = button.data('id');
             let parent_id = button.data('parent-id');
 
@@ -133,13 +133,16 @@ $(document).ready(function () {
                 }
 
                 name = null;
+                category_id = null;
                 id = null;
             }
 
             this._method.val(method);
-            this._input_name.val(name)
-            this._input_id.val(id)
-            this._input_parent_id.val(parent_id)
+            this._input_name.val(name);
+            this._input_category_id.val(category_id);
+            this._input_category_id.change();
+            this._input_id.val(id);
+            this._input_parent_id.val(parent_id);
 
             this._title.text(title)
         }
@@ -156,5 +159,5 @@ $(document).ready(function () {
     new CategoriesModalController();
     new TasksModalController();
 
-    $('.color-select').selectpicker();
+    $('.color-select, .category-select').selectpicker();
 });

@@ -49,6 +49,7 @@
 
 @include('tasks.index',[
 'project' => $current_project,
+'categories' => $all_categories,
 'tasks' => $current_project->tasks()->where('parent_id', null)->get()
 ])
 @endif
