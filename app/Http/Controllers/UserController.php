@@ -44,7 +44,7 @@ class UserController extends Controller
         ]);
 
         return redirect()->route('users.index')
-            ->with('success', 'User updated.');
+            ->with('success', 'User created.');
     }
 
     //Update the specified user in storage.

@@ -7,7 +7,9 @@
 
 <h3 class="d-inline-block">Projects</h3>
 
-@include('projects.buttons.create')
+@include('common.buttons.create',[
+'target' => '#projects-modal'
+])
 
 <ul class="list-group mt-3">
 
@@ -22,9 +24,22 @@
                 </a>
 
                 <div class="actions d-inline-block float-right">
-                    @include('projects.buttons.edit')
-                    @include('projects.buttons.delete')
+
+                    @include('common.buttons.edit',[
+                    'target' => '#projects-modal',
+                    'attributes' =>
+                    [
+                    'data-name' => $project->name,
+                    'data-id' => $project->id
+                    ]
+                    ])
+
+                    @include('common.buttons.delete',[
+                    'action' => route('projects.destroy', $project->id)
+                    ])
+
                 </div>
+
             </li>
 
         @endforeach

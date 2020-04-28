@@ -1,4 +1,4 @@
-<form action="{{ route('projects.destroy', $project->id) }}" method="POST" class="d-inline-block">
+<form action="{{ $action }}" method="POST" class="d-inline-block">
     @csrf
     @method('DELETE')
     <button type="submit" class="btn text-secondary action-btn">

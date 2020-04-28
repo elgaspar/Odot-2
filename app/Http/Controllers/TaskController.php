@@ -49,7 +49,7 @@ class TaskController extends Controller
         $task->update($request->all());
 
         return redirect()->route('projects.view', ['project' => $task->project])
-            ->with('success', 'Task created.');
+            ->with('success', 'Task updated.');
     }
 
     //Remove the specified task from storage.

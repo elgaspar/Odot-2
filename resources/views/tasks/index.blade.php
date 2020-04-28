@@ -4,7 +4,9 @@
             Total: {{ count($tasks) }} tasks
         </div>
 
-        @include('tasks.buttons.create')
+        @include('common.buttons.create',[
+        'target' => '#tasks-modal'
+        ])
     </div>
 
     <ul class="list-group">

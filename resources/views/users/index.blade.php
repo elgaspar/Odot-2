@@ -9,7 +9,9 @@
             Total: {{ count($users) }} users
         </div>
 
-        @include('users.buttons.create')
+        @include('common.buttons.create',[
+        'target' => '#users-modal'
+        ])
     </div>
 
     <table class="table users-table">
@@ -34,8 +36,22 @@
                 <td>{{ $user->email }}</td>
                 <td>{{ $user->is_admin ? 'yes' : 'no' }}</td>
                 <td>
-                    @include('users.buttons.edit')
-                    @include('users.buttons.delete')
+
+                    @include('common.buttons.edit',[
+                    'target' => '#users-modal',
+                    'attributes' =>
+                    [
+                    'data-name' => $user->name,
+                    'data-email' => $user->email,
+                    'data-is-admin' => $user->is_admin,
+                    'data-id' => $user->id
+                    ]
+                    ])
+
+                    @include('common.buttons.delete',[
+                    'action' => route('users.destroy', $user->id)
+                    ])
+
                 </td>
                 </tr>
             @endforeach
