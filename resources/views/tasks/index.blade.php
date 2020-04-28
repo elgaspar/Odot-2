@@ -18,9 +18,14 @@
 
     </ul>
 
-    @include('tasks.modal',[
+    @include('common.modal',[
+    'modal_id' => 'tasks-modal',
+    'form_action' => url('tasks'),
+    'form_content' => 'tasks.formFields',
+    'values' => [
     'project' => $project,
     'categories' => $categories
+    ]
     ])
 
 @endif

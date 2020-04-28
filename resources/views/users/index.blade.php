@@ -61,7 +61,11 @@
 </tbody>
 </table>
 
-@include('users.modal')
+@include('common.modal',[
+'modal_id' => 'users-modal',
+'form_action' => url('users'),
+'form_content' => 'users.formFields',
+])
 
 @endif
 

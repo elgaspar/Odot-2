@@ -44,4 +44,8 @@
 
 </ul>
 
-@include('categories.modal')
+@include('common.modal',[
+'modal_id' => 'categories-modal',
+'form_action' => url('categories'),
+'form_content' => 'categories.formFields'
+])

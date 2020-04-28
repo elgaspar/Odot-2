@@ -48,7 +48,11 @@
 
 </ul>
 
-@include('projects.modal')
+@include('common.modal',[
+'modal_id' => 'projects-modal',
+'form_action' => url('projects'),
+'form_content' => 'projects.formFields'
+])
 
 @include('categories.index', ['categories' => $all_categories])
 
