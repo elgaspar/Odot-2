@@ -13,7 +13,7 @@
 
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-
+                {{-- empty --}}
             </ul>
 
             <!-- Right Side Of Navbar -->

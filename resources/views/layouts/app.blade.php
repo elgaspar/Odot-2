@@ -33,9 +33,11 @@
 
                 <div class="row justify-content-center">
 
-                    <div class="col-md-3">
-                        @yield('sidebar')
-                    </div>
+                    @auth
+                        <div class="col-md-3">
+                            @yield('sidebar')
+                        </div>
+                    @endauth
 
                     <div class="col-md-9">
 

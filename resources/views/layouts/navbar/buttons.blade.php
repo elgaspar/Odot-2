@@ -1,5 +1,11 @@
+<li class="nav-item active">
+    <a class="nav-link" href="{{ route('projects.index') }}">Projects</a>
+</li>
+
 @if(Auth::user()->is_admin)
-    <a href="{{ route('users.index') }}" class="btn btn-primary">View Users</a>
+    <li class="nav-item active">
+        <a class="nav-link" href="{{ route('users.index') }}">Users</a>
+    </li>
 @endif
 
 <li class="nav-item dropdown">
