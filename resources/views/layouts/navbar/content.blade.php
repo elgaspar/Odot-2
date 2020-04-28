@@ -13,20 +13,15 @@
 
             <!-- Left Side Of Navbar -->
             <ul class="navbar-nav mr-auto">
-                {{-- empty --}}
+
             </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
-
                 @guest
-
                     @include('layouts.navbar.guest')
-
                 @else
-
                     @include('layouts.navbar.buttons')
-
                 @endguest
             </ul>
 

@@ -33,13 +33,14 @@
 
                 <div class="row justify-content-center">
 
-                    @auth
+
+                    @hasSection('sidebar')
                         <div class="col-md-3">
                             @yield('sidebar')
                         </div>
-                    @endauth
+                    @endif
 
-                    <div class="col-md-9">
+                    <div class="@hasSection('sidebar') col-md-9 @else col-md-8 @endif">
 
                         @include('common.success')
                         @include('common.errors')
