@@ -1,4 +1,4 @@
-<form action="{{ url('categories')}}" method="POST">
+<form action="{{ url('categories') }}" method="POST">
 
     @csrf
     <input type="hidden" name="_method" value="PUT">

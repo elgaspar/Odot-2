@@ -1,10 +1,9 @@
-@if (Auth::user()->is_admin)
-<a href="{{ route('users.index') }}" class="btn btn-primary">View Users</a>
+@if(Auth::user()->is_admin)
+    <a href="{{ route('users.index') }}" class="btn btn-primary">View Users</a>
 @endif
 
 <li class="nav-item dropdown">
-    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
-        aria-haspopup="true" aria-expanded="false" v-pre>
+    <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
         {{ Auth::user()->name }} <span class="caret"></span>
     </a>
 

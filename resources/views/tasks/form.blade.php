@@ -1,4 +1,4 @@
-<form action="{{ url('tasks')}}" method="POST">
+<form action="{{ url('tasks') }}" method="POST">
 
     @csrf
     <input type="hidden" name="_method" value="PUT">
@@ -17,8 +17,8 @@
         <select class="category-select d-block w-100" name="category_id" id="category_id">
             @include('tasks.selectOption', ['category' => null])
 
-            @foreach ($categories as $category)
-            @include('tasks.selectOption', ['category' => $category])
+            @foreach($categories as $category)
+                @include('tasks.selectOption', ['category' => $category])
             @endforeach
         </select>
     </div>
