@@ -11,191 +11,131 @@ $(document).ready(function () {
     }
 
 
-    class UsersModalController {
-        constructor() {
-            this._modal = $('#users-modal');
-            this._title = this._modal.find('.modal-title');
-            this._method = this._modal.find('input[name="_method"');
-            this._input_name = this._modal.find('input[name="name"');
-            this._input_email = this._modal.find('input[name="email"');
-            this._input_is_admin = this._modal.find('input[name="is_admin"');
-            this._input_id = this._modal.find('input[name="id"');
+    class ModalController {
+        constructor(args) {
+            this._modal = $(args.selector);
+            this._title = args.title;
+            this._inputs_names = args.inputs;
 
+            this._set_show_handler();
+        }
+
+        _set_show_handler() {
             let self = this;
             this._modal.on('show.bs.modal', function (event) {
                 let button = $(event.relatedTarget)
-                self._fill_in_inputs(button);
+                let data = self._get_data(button);
+                self._fill_in_inputs(data);
             })
         }
 
-        _fill_in_inputs(button) {
-            let create_task = button.data('create') ? true : false;
+        _get_data(button) {
+            let data = {};
+            data.create_task = button.data('create') ? true : false;
+            for (const name of this._inputs_names) {
+                data[name] = button.data(name);
+            }
+            return data;
+        }
 
-            let title = 'Edit User';
+        _fill_in_inputs(data) {
+            let title = this._get_title_for_edit();
             let method = 'PUT';
 
-            let name = button.data('name');
-            let email = button.data('email');
-            let is_admin = button.data('is-admin') ? true : false;
-            let id = button.data('id');
-
-            console.log(is_admin);
-
-
-            if (create_task) {
-                title = 'Create User';
+            if (data.create_task) {
+                title = this._get_title_for_create();
                 method = 'POST';
-
-                name = null;
-                email = null;
-                is_admin = false;
-                id = null;
+                data = {};
             }
 
-            this._method.val(method);
-            this._input_name.val(name);
-            this._input_email.val(email);
-            this._input_is_admin.prop('checked', is_admin);
-            this._input_id.val(id);
+            this._set_title(title);
+            this._modal.find('input[name="_method"]').val(method);
 
-            this._title.text(title);
+            for (const name of this._inputs_names) {
+                this._set_input_value(name, data[name]);
+            }
+        }
+
+        _get_title_for_create() {
+            return 'Create ' + this._title;
+        }
+
+        _get_title_for_edit() {
+            return 'Edit ' + this._title;
+        }
+
+        _set_title(value) {
+            this._modal.find('.modal-title').text(value);
+        }
+
+        _set_input_value(input_name, value) {
+            let input = this._get_input(input_name);
+            let type = input.attr('type');
+            if (input.prop("tagName").toLowerCase() == 'select' || type == 'text' || type == 'hidden') {
+                input.val(value);
+                input.change();
+            } else if (type == 'checkbox') {
+                input.prop('checked', value ? true : false);
+            }
+        }
+
+        _get_input(name) {
+            let name_str = '[name="' + name + '"]';
+            let input = this._modal.find('input' + name_str);
+            if (input.length) {
+                return input;
+            }
+            return this._modal.find('select' + name_str);
+        }
+
+    }
+
+    class UsersModalController extends ModalController {
+        constructor() {
+            super({
+                selector: '#users-modal',
+                title: 'User',
+                inputs: ['id', 'name', 'email', 'is_admin']
+            });
         }
     }
 
-    class ProjectsModalController {
+    class ProjectsModalController extends ModalController {
         constructor() {
-            this._modal = $('#projects-modal');
-            this._title = this._modal.find('.modal-title');
-            this._method = this._modal.find('input[name="_method"');
-            this._input_name = this._modal.find('input[name="name"');
-            this._input_id = this._modal.find('input[name="id"');
-
-            let self = this;
-            this._modal.on('show.bs.modal', function (event) {
-                let button = $(event.relatedTarget)
-                self._fill_in_inputs(button);
-            })
-        }
-
-        _fill_in_inputs(button) {
-            let create_task = button.data('create') ? true : false;
-
-            let title = 'Edit Project';
-            let method = 'PUT';
-
-            let name = button.data('name')
-            let id = button.data('id');
-
-            if (create_task) {
-                title = 'Create Project';
-                method = 'POST';
-
-                name = null;
-                id = null;
-            }
-
-            this._method.val(method);
-            this._input_name.val(name)
-            this._input_id.val(id)
-
-            this._title.text(title)
+            super({
+                selector: '#projects-modal',
+                title: 'Project',
+                inputs: ['id', 'name']
+            });
         }
     }
 
-    class CategoriesModalController {
+    class CategoriesModalController extends ModalController {
         constructor() {
-            this._modal = $('#categories-modal');
-            this._title = this._modal.find('.modal-title');
-            this._method = this._modal.find('input[name="_method"');
-            this._input_name = this._modal.find('input[name="name"');
-            this._input_color = this._modal.find('select[name="color"');
-            this._input_id = this._modal.find('input[name="id"');
-
-            let self = this;
-            this._modal.on('show.bs.modal', function (event) {
-                let button = $(event.relatedTarget)
-                self._fill_in_inputs(button);
-            })
-        }
-
-        _fill_in_inputs(button) {
-            let create_task = button.data('create') ? true : false;
-
-            let title = 'Edit Category';
-            let method = 'PUT';
-
-            let name = button.data('name')
-            let color = button.data('color')
-            let id = button.data('id');
-
-            if (create_task) {
-                title = 'Create Category';
-                method = 'POST';
-
-                name = null;
-                color = null;
-                id = null;
-            }
-
-            this._method.val(method);
-            this._input_name.val(name)
-            this._input_color.val(color);
-            this._input_color.change();
-            this._input_id.val(id)
-
-            this._title.text(title)
+            super({
+                selector: '#categories-modal',
+                title: 'Category',
+                inputs: ['id', 'name', 'color']
+            });
+            $('.color-select').selectpicker();
         }
     }
 
-    class TasksModalController {
+    class TasksModalController extends ModalController {
         constructor() {
-            this._modal = $('#tasks-modal');
-            this._title = this._modal.find('.modal-title');
-            this._method = this._modal.find('input[name="_method"');
-            this._input_name = this._modal.find('input[name="name"');
-            this._input_category_id = this._modal.find('select[name="category_id"');
-            this._input_id = this._modal.find('input[name="id"');
-            this._input_parent_id = this._modal.find('input[name="parent_id"');
-
-            let self = this;
-            this._modal.on('show.bs.modal', function (event) {
-                let button = $(event.relatedTarget)
-                self._fill_in_inputs(button);
-            })
+            super({
+                selector: '#tasks-modal',
+                title: 'Task',
+                inputs: ['id', 'name', 'category_id', 'parent_id']
+            });
+            $('.category-select').selectpicker();
         }
 
-        _fill_in_inputs(button) {
-            let create_task = button.data('create') ? true : false;
-
-            let title = 'Edit Task';
-            let method = 'PUT';
-
-            let name = button.data('name')
-            let category_id = button.data('category-id')
-            let id = button.data('id');
-            let parent_id = button.data('parent-id');
-
-            if (create_task) {
-                title = 'Create Task';
-                method = 'POST';
-
-                if (parent_id) {
-                    title = 'Add child to task: ' + name;
-                }
-
-                name = null;
-                category_id = null;
-                id = null;
+        _fill_in_inputs(data) {
+            super._fill_in_inputs(data);
+            if (data.create_task && data.parent_id) {
+                super._set_title('Add child to task: ' + data.name);
             }
-
-            this._method.val(method);
-            this._input_name.val(name);
-            this._input_category_id.val(category_id);
-            this._input_category_id.change();
-            this._input_id.val(id);
-            this._input_parent_id.val(parent_id);
-
-            this._title.text(title)
         }
     }
 
@@ -203,7 +143,6 @@ $(document).ready(function () {
 
 
 
-    //TODO: clean code -> make modal controllers child classes
 
     new InfoMessage();
 
@@ -211,7 +150,5 @@ $(document).ready(function () {
     new ProjectsModalController();
     new CategoriesModalController();
     new TasksModalController();
-
-    $('.color-select, .category-select').selectpicker();
 
 });

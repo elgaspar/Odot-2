@@ -19,7 +19,7 @@
                 [
                 'data-create' => 'true',
                 'data-name' => $task->name,
-                'data-parent-id' => $task->id,
+                'data-parent_id' => $task->id,
                 ]
                 ])
 
@@ -28,7 +28,7 @@
                 'attributes' =>
                 [
                 'data-name' => $task->name,
-                'data-category-id' => $task->category_id,
+                'data-category_id' => $task->category_id,
                 'data-parent-id' => $task->parent_id,
                 'data-id' => $task->id
                 ]

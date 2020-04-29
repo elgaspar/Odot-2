@@ -43,7 +43,7 @@
                     [
                     'data-name' => $user->name,
                     'data-email' => $user->email,
-                    'data-is-admin' => $user->is_admin,
+                    'data-is_admin' => $user->is_admin,
                     'data-id' => $user->id
                     ]
                     ])
